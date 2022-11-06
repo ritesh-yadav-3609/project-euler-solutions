@@ -1,12 +1,11 @@
 
-ls = []
+from math import sqrt
 
-def check_prime(n: int) -> bool:
+def is_prime(n: int) -> bool:
     """
     Checking if n is prime number
     """
-    global ls
-    for i in ls:
+    for i in range(3, int(sqrt(n))+1):
         if n%i == 0:
             return False
     return True
@@ -26,12 +25,9 @@ def smallest_divisible_number(n: int) -> int:
     """
     Smallest positive number that is evenly divisible by all of the numbers below n
     """
-    global ls
-    ls.append(2)
     total = highest_power_number_below(2, n)
     for i in range(3, n+1):
-        if check_prime(i):
-            ls.append(i)
+        if is_prime(i):
             total = total * highest_power_number_below(i, n)
     return total
 
